@@ -54,6 +54,7 @@ public class SamsungCDMAQualcommRIL extends RIL implements
 CommandsInterface {
     protected HandlerThread mIccThread;
     protected IccHandler mIccHandler;
+
     private Object mSMSLock = new Object();
     private boolean mIsSendingSMS = false;
     public static final long SEND_SMS_TIMEOUT_IN_MS = 30000;
@@ -194,6 +195,7 @@ CommandsInterface {
             dc.als = p.readInt();
             voiceSettings = p.readInt();
             dc.isVoice = (0 == voiceSettings) ? false : true;
+            dc.isVoicePrivacy = (0 != p.readInt());
             // Some Samsung magic data for Videocalls
             // hack taken from smdk4210ril class
             voiceSettings = p.readInt();
